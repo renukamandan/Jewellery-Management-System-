@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jewellery Management System</title>
+    <style>
+        /* CSS for styling */
+        .toggle {
+            display: none;
+        }
+        .toggle + label {
+            cursor: pointer;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+        .toggle + label:hover {
+            background-color: #e0e0e0;
+        }
+        .toggle + label::after {
+            content: "\25BC";
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        .toggle:checked + label::after {
+            content: "\25B2";
+        }
+        .content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+        .toggle:checked ~ .content {
+            display: block;
+        }
+        /* Additional styling for demonstration */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jewellery Management System</h1>
+    <input type="checkbox" id="toggle-filters" class="toggle">
+    <label for="toggle-filters">Filters</label>
+    <div class="content">
+        <!-- Filters -->
+        <h2>Filters</h2>
+        <form>
+            <label for="material">Material:</label>
+            <select id="material">
+                <option value="gold">Gold</option>
+                <option value="silver">Silver</option>
+                <option value="Diamond">Diamond</option>
+                <option value="Gold">Gold</option>
+            </select><br><br>
+            <label for="type">Type:</label>
+            <select id="type">
+                <option value="necklace">Necklace</option>
+                <option value="bracelet">Bracelet</option>
+                <option value="ring">Ring</option>
+                <option value="nose ring">Nose ring</option>
+            </select><br><br>
+            <input type="submit" value="Apply Filters">
+        </form>
+    </div>
+    <!-- Display jewellery items -->
+    <h2>Jewellery Items</h2>
+    <ul>
+        <li>Gold Necklace</li>
+        <li>Silver Bracelet</li>
+        <li>Diamond Ring</li>
+        <li>Gold Nose ring</li>
+        <!-- Add more items dynamically if needed -->
+    </ul>
+</body>
+</html>
+

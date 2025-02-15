@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewellery Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px; /* Add margin-bottom to create space after the header */
+        }
+        .line {
+            height: 1px;
+            background-color: #ccc;
+            margin-top: 20px; /* Add margin-top to create space above the line */
+        }
+        .todays-price-container {
+            margin-top: 20px;
+            overflow: auto; /* Add this to contain floated elements */
+            display: flex; /* Use flexbox layout */
+            justify-content: space-between; /* Distribute items evenly */
+            align-items: center; /* Align items vertically */
+        }
+        .todays-price {
+            font-size: 10px;
+            /* No float needed */
+        }
+        .price {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            margin-right: 20px; /* Add space between prices */
+        }
+        .slot {
+            clear: both; /* Clear previous floats to stack slots vertically */
+            margin-top: 20px; /* Add margin-top to space out slots */
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .card-container {
+            display: flex; /* Use flexbox to arrange cards side by side */
+            flex-wrap: wrap; /* Allow cards to wrap to the next line */
+            justify-content: space-between; /* Distribute cards evenly */
+        }
+        .card {
+            width: 30%; /* Set width for each card */
+            margin-bottom: 20px; /* Add margin between cards */
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-sizing: border-box; /* Include padding in the width */
+        }
+        .more-button {
+            display: block;
+            width: 10%;
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* CSS to align images in the gold slot cards to the center */
+        .card img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jewellery Management System</h1>
+    </header>
+    <div class="todays-price-container">
+        <div class="todays-price">
+            <h2>Today's Price</h2>
+        </div>
+        <div class="price">Gold: $<span id="goldPrice">1000</span></div>
+        <div class="price">Silver: $<span id="silverPrice">20</span></div>
+        <div class="price">Diamond: $<span id="diamondPrice">5000</span></div>
+    </div>
+    <div class="line"></div> <!-- Line below the header -->
+
+    <!-- Gold Slot -->
+    <div class="slot" id="gold-slot">
+        <h2>Gold</h2>
+        <div class="card-container" id="gold-cards"></div>
+        <a href="gold.html" class="more-button">More</a>
+    </div>
+
+    <!-- Silver Slot -->
+    <div class="slot" id="silver-slot">
+        <h2>Silver</h2>
+        <div class="card-container" id="silver-cards"></div>
+        <a href="silver.html" class="more-button">More</a>
+    </div>
+
+    <!-- Diamond Slot -->
+    <div class="slot" id="diamond-slot">
+        <h2>Diamond</h2>
+        <div class="card-container" id="diamond-cards"></div>
+        <a href="diamond.html" class="more-button">More</a>
+    </div>
+
+    <script>
+        // JavaScript code
+        // Objects and Arrays
+
+        // Jewellery data represented as objects in arrays
+        const jewelleryData = {
+            gold: [
+                { name: "Gold Jewel 1", description: "Description 1", price: 500, image: "J1.jpg" },
+                { name: "Gold Jewel 2", description: "Description 2", price: 700, image: "J2.jpg" },
+                { name: "Gold Jewel 3", description: "Description 3", price: 900, image: "J3.jpeg" }
+            ],
+            silver: [
+                { name: "Silver Jewel 1", description: "Description 1", price: 50, image: "S1.jpeg" },
+                { name: "Silver Jewel 2", description: "Description 2", price: 70, image: "S2.jpeg" },
+                { name: "Silver Jewel 3", description: "Description 3", price: 90, image: "S3.jpg" }
+            ],
+            diamond: [
+                { name: "Diamond Jewel 1", description: "Description 1", price: 1000, image: "D1.png" },
+                { name: "Diamond Jewel 2", description: "Description 2", price: 1500, image: "D2.jpg" },
+                { name: "Diamond Jewel 3", description: "Description 3", price: 2000, image: "D3.jpeg" }
+            ]
+        };
+
+        // Function to create a card element
+        function createCard(cardData) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            const image = document.createElement('img');
+            image.src = cardData.image;
+            image.alt = cardData.name;
+            card.appendChild(image);
+
+            const name = document.createElement('h3');
+            name.textContent = cardData.name;
+            card.appendChild(name);
+
+            const description = document.createElement('p');
+            description.textContent = cardData.description;
+            card.appendChild(description);
+
+            const price = document.createElement('p');
+            price.textContent = `Price: $${cardData.price}`;
+            card.appendChild(price);
+
+            return card;
+        }
+
+        // Function to populate cards in a slot
+        function populateCards(slotId, data) {
+            const slot = document.getElementById(slotId);
+            const cardContainer = slot.querySelector('.card-container');
+            cardContainer.innerHTML = ''; // Clear previous cards
+
+            data.forEach(item => {
+                const card = createCard(item);
+                cardContainer.appendChild(card);
+            });
+        }
+
+        // Populate cards in each slot
+        populateCards('gold-slot', jewelleryData.gold);
+        populateCards('silver-slot', jewelleryData.silver);
+        populateCards('diamond-slot', jewelleryData.diamond);
+    </script>
+</body>
+</html>
+
